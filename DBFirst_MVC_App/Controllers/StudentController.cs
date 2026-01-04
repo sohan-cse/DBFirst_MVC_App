@@ -94,5 +94,35 @@ namespace DBFirst_MVC_App.Controllers
             TempData["error"]= "Failed to update student. Please check the input data.";
             return View(student);
         }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id != null)
+            {
+                Student student = _context.Students.FirstOrDefault(s => s.Id == id);
+                if (student != null)
+                {
+                   
+                    return View(student);
+                }
+                TempData["error"] = "Invalid Student Id";
+                return RedirectToAction("Index");
+            }
+            TempData["error"] = "Invalid Student Id";
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public IActionResult Delete(Student student)
+        { 
+            if (student != null)
+            {
+                _context.Students.Remove(student);
+                _context.SaveChanges();
+                TempData["success"] = "Student deleted successfully.";
+                return RedirectToAction("Index");
+            }
+            TempData["error"] = "Failed to delete student. Please try again.";
+            return RedirectToAction("Index");
+        }
     }
 }
