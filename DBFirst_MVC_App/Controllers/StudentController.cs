@@ -44,6 +44,7 @@ namespace DBFirst_MVC_App.Controllers
         {
             return View();
         }
+        [Route("CreateStudent")]
         [HttpPost]
         public IActionResult Create(Student student)
         {
@@ -85,7 +86,7 @@ namespace DBFirst_MVC_App.Controllers
             TempData["error"] = "Invalid Student Id";
             return RedirectToAction("Index");
         }
-
+        [Route("UpdateStudent/{id}")]
         [HttpPost]
         public IActionResult Edit(Student student)
         {
@@ -118,6 +119,7 @@ namespace DBFirst_MVC_App.Controllers
             TempData["error"] = "Invalid Student Id";
             return RedirectToAction("Index");
         }
+        [Route("DeleteStudent/{id}")]
         [HttpPost]
         public IActionResult Delete(Student student)
         { 
