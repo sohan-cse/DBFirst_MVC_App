@@ -13,12 +13,14 @@ namespace DBFirst_MVC_App.Controllers
             _context = context;
         }
 
+        [Route("AllStudents")]
         public IActionResult Index()
         {
             //It reads all rows from the Student table, converts them into a list of Student objects, and stores them in the students variable.
             List<Student> students = _context.Students.ToList();
             return View(students);
         }
+        [Route("StudentDetails/{id}")]
         public IActionResult Details(int id)
         {
             if (id == null || id == 0)
@@ -35,7 +37,9 @@ namespace DBFirst_MVC_App.Controllers
             }
             return View(student);
         }
+        [Route("CreateStudent")]
         [HttpGet]
+
         public IActionResult Create()
         {
             return View();
@@ -64,6 +68,7 @@ namespace DBFirst_MVC_App.Controllers
         //    TempData["success"] = "Student created successfully.";
         //    return RedirectToAction("Index");
         //}
+        [Route("UpdateStudent/{id}")]
         [HttpGet]
         public IActionResult Edit(int? id)
         {
@@ -95,6 +100,8 @@ namespace DBFirst_MVC_App.Controllers
             return View(student);
         }
 
+        [Route("DeleteStudent/{id}")]
+        [HttpGet]
         public IActionResult Delete(int? id)
         {
             if (id != null)
